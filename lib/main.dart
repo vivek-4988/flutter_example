@@ -6,7 +6,21 @@ void main() {
   ));
 }
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+
+  TextEditingController _textEditingController = TextEditingController();
+  var myText = "Flutter demo";
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -14,6 +28,13 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         title: Text("My demo"),
         backgroundColor: Colors.purple,
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: (){
+          myText = _textEditingController.text;
+          setState(() {});
+        },
+        child: Icon(Icons.refresh),
       ),
       body: Container(
         child: SingleChildScrollView(
@@ -24,10 +45,11 @@ class HomePage extends StatelessWidget {
                 SizedBox(
                   height: 20,
                 ),
-                Text("Flutter demo"),
+                Text(myText),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextField(
+                    controller: _textEditingController,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
                       hintText: "Type here",
